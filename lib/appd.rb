@@ -1,5 +1,8 @@
+require "appd/app"
 require "appd/version"
 
 module Appd
-  # Your code goes here...
+  def self.docker_select(server)
+    puts `source ~/.appd/#{server}`
+  end
 end
