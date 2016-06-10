@@ -2,7 +2,12 @@
 
 Docker compose wrapper to manage multiple apps.
 
+Appd uses [direnv](http://direnv.net/) to execute docker-compose
+commands in isolation while using the app's own environment.
+
 ## Installation
+
+Install [direnv](http://direnv.net/) if you haven't already.
 
 Add this line to your application's Gemfile:
 
@@ -21,6 +26,10 @@ Or install it yourself as:
 ## Usage
 
 ```sh
+# Setup $APP_PATH
+export APP_PATH /path/to/your/apps
+
+# See help
 appd help
 ```
 
