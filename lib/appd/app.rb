@@ -33,7 +33,7 @@ module Appd
     private
 
     def docker_compose(command)
-      puts `direnv exec $APP_PATH/#{name} docker-compose -f $APP_PATH/#{name}/docker-compose.yml #{command}`
+      Appd.exec "direnv exec $APP_PATH/#{name} docker-compose -f $APP_PATH/#{name}/docker-compose.yml #{command}"
     end
   end
 end
