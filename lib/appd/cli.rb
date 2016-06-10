@@ -12,6 +12,7 @@ module Appd
       puts "  appd APPNAME command\n\n"
       puts "Commands:"
       self.class.commands.each { |_, command| printf "%-30s %s\n", "  #{command.usage} ", "# #{command.description}" }
+      puts "\nNote: appd looks for apps in the $APP_PATH directory."
     end
 
     desc "ps", "List containers"
