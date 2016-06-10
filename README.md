@@ -31,6 +31,19 @@ export APP_PATH /path/to/your/apps
 
 # See help
 appd help
+Usage:
+  appd APPNAME command
+
+Commands:
+  help                         # Show this help
+  ps                           # List containers
+  build SERVICES               # Build or rebuild services
+  up SERVICES                  # Create and start services
+  stop SERVICES                # Stop services
+  restart SERVICES             # Restart services
+  exec SERVICE COMMAND         # Execute a command in a running container
+
+Note: appd looks for apps in the $APP_PATH directory.
 ```
 
 ## Development
