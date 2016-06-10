@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+# Exit cleanly from an early interrupt
+Signal.trap("INT") { exit 1 }
+
+require "appd"
+require "appd/cli"
+
+if ARGV[0] != "help" && app_name = ARGV.shift
+  ARGV << "--app"
+  ARGV << app_name
+end
+
+Appd::CLI.start(ARGV, debug: true)
