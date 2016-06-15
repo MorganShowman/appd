@@ -2,7 +2,11 @@ require "thor"
 
 module Appd
   class CLI < Thor
-    class_option :app, type: :string, hide: true, required: ARGV.count > 0 && ARGV[0] != 'help'
+    class_option :app_path, type: :string, hide: true
+    class_option :app, type: :string, hide: true, required: ARGV.count > 0 &&
+                                                              ARGV[0] != 'help' &&
+                                                              ARGV[0] != "select" &&
+                                                              ARGV[0] != "."
 
     default_task :help
 
@@ -13,6 +17,7 @@ module Appd
       puts "Commands:"
       self.class.commands.each { |_, command| printf "%-30s %s\n", "  #{command.usage} ", "# #{command.description}" }
       puts "\nNote: appd looks for apps in the $APP_PATH directory."
+      puts "      APPNAME can be . for current app."
     end
 
     desc "ps", "List containers"
@@ -49,7 +54,7 @@ module Appd
 
     no_tasks do
       def app
-        Appd::App.new(options.app)
+        Appd::App.new(options)
       end
     end
   end

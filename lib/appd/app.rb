@@ -1,9 +1,9 @@
 module Appd
   class App
-    attr_reader :name
+    attr_reader :options
 
-    def initialize(name)
-      @name = name
+    def initialize(options)
+      @options = options
     end
 
     def ps
@@ -32,8 +32,12 @@ module Appd
 
     private
 
+    def app_path
+      options.app_path || "#{ENV["APP_PATH"]}/#{options.app}"
+    end
+
     def docker_compose(command)
-      Appd.exec "direnv exec $APP_PATH/#{name} docker-compose -f $APP_PATH/#{name}/docker-compose.yml #{command}"
+      Appd.exec "direnv exec #{app_path} docker-compose -f #{app_path}/docker-compose.yml #{command}"
     end
   end
 end
