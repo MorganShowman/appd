@@ -44,6 +44,7 @@ Commands:
   exec SERVICE COMMAND         # Execute a command in a running container
 
 Note: appd looks for apps in the $APP_PATH directory.
+      APPNAME can be . for current app.
 ```
 
 ## Development
