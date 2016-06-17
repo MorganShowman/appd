@@ -2,10 +2,10 @@ require "thor"
 
 module Appd
   class CLI < Thor
-    class_option :app_path, type: :string, hide: true
-    class_option :app, type: :string, hide: true, required: ARGV.count > 0 &&
-                                                              ARGV[0] != 'help' &&
-                                                              ARGV[0] != "."
+    class_option :app_path, type: :string, aliases: "-p", desc: "Override $APP_PATH"
+    class_option :app, type: :string, hide: true, aliases: "-a", required: ARGV.count > 0 &&
+                                                                             ARGV[0] != 'help' &&
+                                                                             ARGV[0] != "."
     class_option :file, type: :string, aliases: "-f", default: "docker-compose.yml", desc: "Specify a docker-compose.yml file relative to the app"
     class_option :server, type: :string, aliases: "-s", desc: "Specify a docker server env file"
 
@@ -14,11 +14,18 @@ module Appd
     desc "help", "Show this help"
     def help
       puts "Usage:"
-      puts "  appd APPNAME command\n\n"
-      puts "Commands:"
+      puts "  appd APPNAME command [OPTIONS]\n\n"
+      puts "Options:"
+      self.class.class_options.each do |_, option|
+        if !option.hide
+          printf "%-30s %s\n", "  #{option.aliases.join(", ")}  ", "# #{option.description}"
+          printf "%-30s %s\n", "", "#   (defaults to: \"#{option.default}\")" if option.default
+        end
+      end
+      puts "\nCommands:"
       self.class.commands.each { |_, command| printf "%-30s %s\n", "  #{command.usage} ", "# #{command.description}" }
-      puts "\nNote: appd looks for apps in the $APP_PATH directory."
-      puts "      APPNAME can be . for current app."
+      puts "\nNotes: Appd looks for apps in the $APP_PATH directory."
+      puts "       APPNAME can be . for current app."
     end
 
     desc "ps", "List containers"
