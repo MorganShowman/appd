@@ -5,7 +5,6 @@ module Appd
     class_option :app_path, type: :string, hide: true
     class_option :app, type: :string, hide: true, required: ARGV.count > 0 &&
                                                               ARGV[0] != 'help' &&
-                                                              ARGV[0] != "select" &&
                                                               ARGV[0] != "."
 
     default_task :help

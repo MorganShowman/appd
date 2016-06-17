@@ -6,7 +6,7 @@ Signal.trap("INT") { exit 1 }
 require "appd"
 require "appd/cli"
 
-if ARGV[0] != "help" && ARGV[0] != "select" && app = ARGV.shift
+if ARGV[0] != "help" && app = ARGV.shift
   if app == "."
     ARGV << "--app-path"
     ARGV << Dir.pwd
