@@ -41,7 +41,7 @@ Commands:
   up SERVICES                  # Create and start services
   stop SERVICES                # Stop services
   restart SERVICES             # Restart services
-  exec SERVICE COMMAND         # Execute a command in a running container
+  exec SERVICE -c "COMMAND"    # Execute a command in a running container
 
 Note: appd looks for apps in the $APP_PATH directory.
       APPNAME can be . for current app.
