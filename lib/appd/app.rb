@@ -33,7 +33,7 @@ module Appd
     private
 
     def app_path
-      options.app_path || "#{ENV["APP_PATH"]}/#{options.app}"
+      "#{options.app_path || ENV["APP_PATH"]}/#{options.app}"
     end
 
     def docker_compose(command)
