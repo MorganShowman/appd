@@ -44,9 +44,10 @@ module Appd
       app.restart(*services)
     end
 
-    desc "exec SERVICE COMMAND", "Execute a command in a running container"
-    def exec(service, *command_args)
-      app.exec(service, command_args.join(" "))
+    desc "exec SERVICE -c \"COMMAND\"", "Execute a command in a running container"
+    option :command, type: :string, aliases: "-s", required: true
+    def exec(service)
+      app.exec(service, options.command)
     end
 
     private
