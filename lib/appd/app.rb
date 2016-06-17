@@ -37,7 +37,7 @@ module Appd
     end
 
     def docker_compose(command)
-      Appd.exec "direnv exec #{app_path} docker-compose -f #{app_path}/docker-compose.yml #{command}"
+      Appd.exec "direnv exec #{app_path} docker-compose -f #{app_path}/docker-compose.yml #{command}", server: options.server
     end
   end
 end

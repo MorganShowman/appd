@@ -6,6 +6,7 @@ module Appd
     class_option :app, type: :string, hide: true, required: ARGV.count > 0 &&
                                                               ARGV[0] != 'help' &&
                                                               ARGV[0] != "."
+    class_option :server, type: :string, aliases: "-s", desc: "Specify a docker server env file"
 
     default_task :help
 
