@@ -8,10 +8,10 @@ require "appd/cli"
 
 if ARGV[0] != "help" && app = ARGV.shift
   if app == "."
-    ARGV << "--app-path"
+    ARGV << "-p"
     ARGV << Dir.pwd
   else
-    ARGV << "--app"
+    ARGV << "-a"
     ARGV << app
   end
 end

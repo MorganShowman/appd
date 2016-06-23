@@ -32,12 +32,12 @@ module Appd
 
     private
 
-    def app_path
-      "#{options.app_path || ENV["APP_PATH"]}/#{options.app}"
+    def docker_compose_file
+      "#{options.apps_path}/#{options.app}/#{options.file}"
     end
 
     def docker_compose(command)
-      Appd.exec "direnv exec #{app_path} docker-compose -f #{app_path}/#{options.file} #{command}", server: options.server
+      Appd.exec "docker-compose -f #{docker_compose_file} #{command}", options
     end
   end
 end

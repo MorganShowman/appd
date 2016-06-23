@@ -26,8 +26,8 @@ Or install it yourself as:
 ## Usage
 
 ```sh
-# Setup $APP_PATH
-export APP_PATH /path/to/your/apps
+# Setup $APPS_PATH
+export APPS_PATH /path/to/your/apps
 
 # See help
 appd help
@@ -35,7 +35,7 @@ Usage:
   appd APPNAME command [OPTIONS]
 
 Options:
-  -p                           # Override $APP_PATH
+  -p                           # Override $APPS_PATH
   -f                           # Specify a docker-compose.yml file relative to the app
                                #   (defaults to: "docker-compose.yml")
   -s                           # Specify a docker server env file
@@ -49,7 +49,7 @@ Commands:
   restart SERVICES             # Restart services
   exec SERVICE -c "COMMAND"    # Execute a command in a running container
 
-Notes: Appd looks for apps in the $APP_PATH directory.
+Notes: Appd looks for apps in the $APPS_PATH directory.
        APPNAME can be . for current app.
 ```
 
