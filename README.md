@@ -42,6 +42,7 @@ Options:
 
 Commands:
   help                         # Show this help
+  select                       # Select a Docker Server ENV file to use
   ps                           # List containers
   build SERVICES               # Build or rebuild services
   up SERVICES                  # Create and start services
@@ -51,6 +52,7 @@ Commands:
 
 Notes: Appd looks for apps in the $APPS_PATH directory.
        APPNAME can be . for current app.
+       The currently selected Docker Server ENV file is stored in ~/.appd/current-server
 ```
 
 ## Docker Server ENV Files

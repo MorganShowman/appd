@@ -6,7 +6,12 @@ Signal.trap("INT") { exit 1 }
 require "appd"
 require "appd/cli"
 
-if ARGV[0] != "help" && app = ARGV.shift
+APPD_PATH = File.expand_path("~/.appd")
+
+Dir.mkdir(APPD_PATH) if !File.directory?(APPD_PATH)
+File.write("#{APPD_PATH}/current-server") if !File.file?("#{APPD_PATH}/current-server")
+
+if ARGV[0] != "help" && ARGV[0] != "select" && app = ARGV.shift
   if app == "."
     ARGV << "-p"
     ARGV << Dir.pwd

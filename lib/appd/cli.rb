@@ -4,7 +4,8 @@ module Appd
   class CLI < Thor
     class_option :apps_path, type: :string, aliases: "-p", default: Appd.apps_path, desc: "Override $APPS_PATH"
     class_option :app, type: :string, hide: true, aliases: "-a", required: ARGV.count > 0 &&
-                                                                             ARGV[0] != 'help' &&
+                                                                             ARGV[0] != "help" &&
+                                                                             ARGV[0] != "select" &&
                                                                              ARGV[0] != "."
     class_option :file, type: :string, aliases: "-f", default: "docker-compose.yml", desc: "Specify a docker-compose.yml file relative to the app"
     class_option :server, type: :string, aliases: "-s", desc: "Specify a docker server env file"
@@ -26,6 +27,12 @@ module Appd
       self.class.commands.each { |_, command| printf "%-30s %s\n", "  #{command.usage} ", "# #{command.description}" }
       puts "\nNotes: Appd looks for apps in the $APPS_PATH directory."
       puts "       APPNAME can be . for current app."
+      puts "       The currently selected Docker Server ENV file is stored in ~/.appd/current-server"
+    end
+
+    desc "select", "Select a Docker Server ENV file to use"
+    def select(server)
+      Appd.select(server)
     end
 
     desc "ps", "List containers"
