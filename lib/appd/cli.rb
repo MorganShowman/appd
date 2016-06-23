@@ -61,7 +61,7 @@ module Appd
     end
 
     desc "exec SERVICE -c \"COMMAND\"", "Execute a command in a running container"
-    option :command, type: :string, aliases: "-s", required: true
+    option :command, type: :string, aliases: "-c", required: true
     def exec(service)
       app.exec(service, options.command)
     end
