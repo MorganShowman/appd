@@ -2,7 +2,7 @@ require "thor"
 
 module Appd
   class CLI < Thor
-    class_option :app_path, type: :string, aliases: "-p", desc: "Override $APP_PATH"
+    class_option :apps_path, type: :string, aliases: "-p", default: Appd.apps_path, desc: "Override $APPS_PATH"
     class_option :app, type: :string, hide: true, aliases: "-a", required: ARGV.count > 0 &&
                                                                              ARGV[0] != 'help' &&
                                                                              ARGV[0] != "."
@@ -24,7 +24,7 @@ module Appd
       end
       puts "\nCommands:"
       self.class.commands.each { |_, command| printf "%-30s %s\n", "  #{command.usage} ", "# #{command.description}" }
-      puts "\nNotes: Appd looks for apps in the $APP_PATH directory."
+      puts "\nNotes: Appd looks for apps in the $APPS_PATH directory."
       puts "       APPNAME can be . for current app."
     end
 
