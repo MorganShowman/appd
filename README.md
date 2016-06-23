@@ -36,6 +36,7 @@ Usage:
 
 Options:
   -p                           # Override $APPS_PATH
+  -e                           # Specify an ENV file to use
   -f                           # Specify a docker-compose.yml file relative to the app
                                #   (defaults to: "docker-compose.yml")
   -s                           # Specify a docker server env file
@@ -43,6 +44,7 @@ Options:
 Commands:
   help                         # Show this help
   select                       # Select a Docker Server ENV file to use
+  env                          # Select an ENV file to use
   ps                           # List containers
   build SERVICES               # Build or rebuild services
   up SERVICES                  # Create and start services
@@ -52,12 +54,24 @@ Commands:
 
 Notes: Appd looks for apps in the $APPS_PATH directory.
        APPNAME can be . for current app.
+       The currently selected ENV file is stored in ~/.appd/current-env
        The currently selected Docker Server ENV file is stored in ~/.appd/current-server
 ```
 
+## ENV files
+ENV files are stored in `~/.appd/envs/` and these files setup any
+environment variables you want used when Appd executes commands.
+
+ENV file:
+
+```sh
+export APPS_PATH=/path/to/your/apps
+export MY_ENV_VAR="Hello World!"
+```
+
 ## Docker Server ENV Files
-Docker server env files are stored in `~/.appd/` and these files setup
-the current environment with the correct environment variables for
+Docker server env files are stored in `~/.appd/servers/` and these files
+setup the current environment with the correct environment variables for
 connecting to docker. You can either specify the variables manually or
 execute the appropriate docker-machine command.
 
@@ -72,7 +86,7 @@ appd my-app ps -s manual
 ENV file:
 
 ```sh
-# ~/.appd/manual
+# ~/.appd/servers/manual
 export DOCKER_TLS_VERIFY="1"
 export DOCKER_HOST="tcp://127.0.0.1:2376"
 export DOCKER_CERT_PATH="/your/path/to/cert"
@@ -90,7 +104,7 @@ appd my-app ps -s docker-machine
 ENV file:
 
 ```sh
-# ~/.appd/docker-machine
+# ~/.appd/servers/docker-machine
 eval "$(docker-machine env my-docker-machine)"
 ```
 
