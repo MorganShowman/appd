@@ -6,7 +6,9 @@ module Appd
     class_option :app, type: :string, hide: true, aliases: "-a", required: ARGV.count > 0 &&
                                                                              ARGV[0] != "help" &&
                                                                              ARGV[0] != "select" &&
+                                                                             ARGV[0] != "env" &&
                                                                              ARGV[0] != "."
+    class_option :env, type: :string, aliases: "-e", desc: "Specify an ENV file to use"
     class_option :file, type: :string, aliases: "-f", default: "docker-compose.yml", desc: "Specify a docker-compose.yml file relative to the app"
     class_option :server, type: :string, aliases: "-s", desc: "Specify a docker server env file"
 
@@ -33,6 +35,11 @@ module Appd
     desc "select", "Select a Docker Server ENV file to use"
     def select(server)
       Appd.select(server)
+    end
+
+    desc "env", "Select an ENV file to use"
+    def env(name)
+      Appd.env(name)
     end
 
     desc "ps", "List containers"
